@@ -247,7 +247,7 @@ async def download_video(url,cmd, name):
         name = name.split(".")[0]
         if os.path.isfile(f"{name}.mkv"):
             return f"{name}.mkv"
-        elif os.path.isfile(f"{name}.mkv"):
+        elif os.path.isfile(f"{name}.mp4"):
             return f"{name}.mp4"
         elif os.path.isfile(f"{name}.mp4.webm"):
             return f"{name}.mp4.webm"
