@@ -254,7 +254,7 @@ async def download_video(url,cmd, name):
 
         return name
     except FileNotFoundError as exc:
-        return os.path.isfile.splitext[0] + "." + "mp4"
+        raise FileNotFoundError(f"Video not downloaded: {name}")
 
 
 async def send_doc(bot: Client, m: Message, cc, ka, cc1, prog, count, name, channel_id):
@@ -282,6 +282,9 @@ def decrypt_file(file_path, key):
 
 async def download_and_decrypt_video(url, cmd, name, key):  
     video_path = await download_video(url, cmd, name)  
+    if not video_path or not os.path.exists(video_path):
+        print(f"❌ Download failed for {name}")
+        return None
     
     if video_path:  
         decrypted = decrypt_file(video_path, key)  
