@@ -578,13 +578,15 @@ async def back_to_main_menu(client, callback_query):
             [InlineKeyboardButton(text="📞 Contact", url=f"tg://openmessage?user_id={OWNER}"), InlineKeyboardButton(text="🛠️ Repo", url="https://github.com/nikhilsainiop/saini-txt-direct")],
         ])
     
-    await callback_query.message.edit_media(
-      InputMediaPhoto(
-        media="https://envs.sh/GVI.jpg",
+local_path = await get_local_image("https://tinypic.host/images/2025/07/14/file_00000000.jpg")
+await callback_query.message.edit_media(
+    InputMediaPhoto(
+        media=local_path,
         caption=caption
-      ),
-      reply_markup=keyboard
-    )
+    ),
+    reply_markup=keyboard
+)
+os.remove(local_path)
     await callback_query.answer()  
 
 @bot.on_callback_query(filters.regex("cmd_command"))
