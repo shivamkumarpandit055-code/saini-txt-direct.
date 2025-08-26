@@ -511,6 +511,7 @@ start_message = await bot.send_photo(
     photo=local_path,
     caption=caption
 )
+
 os.remove(local_path)
     await asyncio.sleep(1)
     await start_message.edit_text(
