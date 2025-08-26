@@ -39,6 +39,24 @@ import zipfile
 import shutil
 import ffmpeg
 
+import tempfile
+
+async def get_local_image(url: str) -> str:
+    """
+    Download image from URL and return local file path.
+    Telegram does not accept URLs with query params (?key=...),
+    so we save them temporarily and send local file instead.
+    """
+    import requests, os
+    r = requests.get(url, stream=True)
+    if r.status_code == 200:
+        fd, path = tempfile.mkstemp(suffix=".jpg")
+        with os.fdopen(fd, "wb") as f:
+            for chunk in r.iter_content(1024):
+                f.write(chunk)
+        return path
+    else:
+        raise Exception(f"Failed to download image: {url}")
 # Initialize the bot
 bot = Client(
     "bot",
