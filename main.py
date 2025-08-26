@@ -487,10 +487,10 @@ async def start(bot, m: Message):
 
     mention = user.mention
     caption = f"🌟 Welcome {m.from_user.mention} ! 🌟"
-    start_message = await bot.send_photo(
-        chat_id=m.chat.id,
-        photo="https://tinypic.host/images/2025/07/14/IMG_20250714_161041_194.jpg",
-        caption=caption
+    start_message = await bot.send_document(
+    chat_id=m.chat.id,
+    document="https://tinypic.host/images/2025/07/14/IMG_20250714_161041_194.jpg",
+    caption=caption
     )
 
     await asyncio.sleep(1)
@@ -576,11 +576,8 @@ async def cmd(client, callback_query):
         [InlineKeyboardButton("🚻 User", callback_data="user_command"), InlineKeyboardButton("🚹 Owner", callback_data="owner_command")],
         [InlineKeyboardButton("🔙 Back to Main Menu", callback_data="back_to_main_menu")]
     ])
-    await callback_query.message.edit_media(
-    InputMediaPhoto(
-      media="https://tinypic.host/images/2025/07/14/file_00000000fc2461fbbdd6bc500cecbff8_conversation_id6874702c-9760-800e-b0bf-8e0bcf8a3833message_id964012ce-7ef5-4ad4-88e0-1c41ed240c03-1-1.jpg",
-      caption=caption
-    ),
+    await callback_query.message.edit_caption(
+    caption=caption,
     reply_markup=keyboard
     )
 
