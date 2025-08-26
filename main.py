@@ -512,7 +512,6 @@ start_message = await bot.send_photo(
     caption=caption
 )
 os.remove(local_path)
-
     await asyncio.sleep(1)
     await start_message.edit_text(
         f"🌟 Welcome {m.from_user.first_name}! 🌟\n\n" +
