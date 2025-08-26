@@ -505,11 +505,13 @@ async def start(bot, m: Message):
 
     mention = user.mention
     caption = f"🌟 Welcome {m.from_user.mention} ! 🌟"
-    start_message = await bot.send_document(
+local_path = await get_local_image("https://tinypic.host/images/2025/07/14/IMG_20250714_161041_194.jpg")
+start_message = await bot.send_photo(
     chat_id=m.chat.id,
-    document="https://tinypic.host/images/2025/07/14/IMG_20250714_161041_194.jpg",
+    photo=local_path,
     caption=caption
-    )
+)
+os.remove(local_path)
 
     await asyncio.sleep(1)
     await start_message.edit_text(
